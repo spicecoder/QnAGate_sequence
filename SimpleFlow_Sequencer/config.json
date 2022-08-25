@@ -1,0 +1,5 @@
+{"process_dir":"process_units",
+ "processlog" :"processstatusLog.json",
+ "sequencelocker":"processUnitlocker.json",
+ "sequence" :"./docker_flower.json"
+} 

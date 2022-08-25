@@ -1,1 +1,0 @@
-# QnAGate_sequence

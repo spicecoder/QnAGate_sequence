@@ -1,0 +1,37 @@
+{
+    "Sequence": {
+        "name":"Day Start",
+        "user": "u1",
+        "units": [
+            {   "preamble" :{"QnA": {"How are you":"I am fine","Have you gone to school":"Yes I have"},"Remove":"YES" },
+                "name": "unit_1",
+                "sh": "process_units/unit_1/hello.sh",
+               "postamble":{"QnA": {"How are you":"I am Good"} }
+            },  
+            {
+                "preamble" :{"QnA": {"How are you":"I am fine","Have you gone to school":"Not really"} ,"Remove":"NO"},
+                "name": "unit_2",
+                "sh": "process_units/unit_2/schools.sh"
+
+            },
+            {
+                "preamble" :{"QnA": {"How are you":"School Day!","Have you gone to school":"yes"} ,
+                "name": "unit_3",
+                "sh": "process_units/unit_1/schools.sh",
+                "postamble" :{"QnA": {"How are you":"I am fine"} }
+
+            }
+          
+        ],
+        "flow":{
+           
+            "QnA":{"How are you":"School Day!","Have you gone to school":"yes"}
+        },
+
+        "pof":"Greet"
+       
+        
+       
+    }
+
+}

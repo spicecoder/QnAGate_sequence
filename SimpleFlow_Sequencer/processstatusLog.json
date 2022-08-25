@@ -1,0 +1,17 @@
+[
+    {
+        "user": "u1",
+        "name": "goatrun",
+        "loopCount":9,
+        "unitName": "unit_1",
+        "unitIndex": 0,
+        "nextUnit": 1
+    },
+    {
+        "user": "u1",
+        "name": "Day Start",
+        "unitName": "unit_3",
+        "unitIndex": 2,
+        "nextUnit": -1
+    }
+]
