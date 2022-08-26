@@ -2,39 +2,41 @@
 var EventEmitter = require('events').EventEmitter;
 class FlowEmitter extends EventEmitter {};
 const flowEmitter = new FlowEmitter();
-const QATrigger = require('./QATrigger.js');
-const QAOverride = require('./QAOverride.js');
-const updateLockedSequence =require('./updateLockedUnit.js');
-const subExec = require('./subExec.js');
+const QT = require('./QATrigger.js');
+const QO = require('./QAOverride.js');
+const uL =require('./updateLockedUnit.js');
+const sX = require('./subExec.js');
 
 fs = require('fs');
 path = require('path');
-const { execFile } = require('child_process');
+
 var chmod = require('chmod');
 const process = require('process');
 
 const cf = require('./config.json');
 const { Console } = require('console');
+const { exit } = require('process');
 
 
 function emit(ev,d){flowEmitter.emit(ev,d)};
 //function onevent(e,edata) {flowEmitter.on(e,)}
   //
 flowEmitter.on('SQ_UnitStarter', (data) => {
-  console.log('a start of Unit event occurred!'+ JSON.stringify(data));
+  console.log('a start of loop event occurred!,loop count'+ JSON.stringify(data.name)+JSON.stringify(data.flow.loopcount)+" past indx:"+JSON.stringify(data.flow.execindex));
   
   var aseq = data; 
-  aseq.flow.loopcount = parseInt(data.loopcount ) + 1 ;
-  if (aseq.flow.loopcount > aseq.flow.looplimit) {
+  aseq.flow.loopcount = parseInt(data.flow.loopcount ) + 1 ;
+  if (aseq.flow.loopcount > parseInt(aseq.flow.looplimit)) {
     console.log("finishing ,loop limit reached");
+    exit(0);
     return ;
   
-  }
+   }
   if(data){
    
     if (aseq.flow.loopcount === 1){    //start of process
       //loop through the units and compare qnA subset match
-      console.log("start of loop :" + aseq.flow.loopcount )
+      console.log("First loop :" + aseq.flow.loopcount )
       var cindex = -1;
 
      // QAOverride(data[postamble],data.flow);
@@ -46,34 +48,34 @@ flowEmitter.on('SQ_UnitStarter', (data) => {
         // if (unit.preamble)
           {var eqar =unit.preamble.QnA};
         // console.log("flow qna:" + JSON.stringify(aseq.flow));
-       if ( QATrigger(eqar,aseq.flow) === 1) {//
+       if ( QT.QATrigger(eqar,aseq.flow.QnA) === 1) {//
+        console.log("gate open:" + JSON.stringify(unit.preamble.QnA));
         const process_sq ={};
-        console.log("process index in loop now:" + cindex);
+        console.log("unit index  now:" + cindex);
         process_sq["user"] = aseq.user;
         process_sq["name"] = aseq.name;
         process_sq["unitName"]=aseq.units[cindex].name;
         process_sq["unitIndex"]= cindex;
         aseq.flow.execindex =cindex;
         process_sq["unitsh"]= unit.sh; 
-        aseq.flow["execindex"] = cindex;
-        if (aseq.units[cindex].postamble == "") {aseq.flow["nextUnit"]= -1 } //safe
+        //aseq.flow["execindex"] = cindex;
+        if (aseq.units[cindex].postamble.QnA == "") {aseq.flow["nextUnit"]= -1 } //safe
     
-         console.log("New proc to exec " +JSON.stringify(process_sq));
+         console.log("New proc to exec " +JSON.stringify(process_sq.unitsh));
          //processSQ(process_sq);
   
   
-         updateLockedUnit(aseq);
-        //flowEmitter.emit("SQ_Process", process_sq);
-        // unit_trigger();
-      
-      subExec(process_sq)
+         uL.updateLockedUnit(aseq);
+        
+      sX.subExec(process_sq)
         
        break ;
        } 
       console.log("increment:"+cindex);
       
       }// for units
-      console.log("finished Execution");
+      console.log("finishing this loop:"+ aseq.flow.loopcount +":"+aseq.flow.execindex);
+      //process.exit(0);
      }
 
      
@@ -83,20 +85,26 @@ flowEmitter.on('SQ_UnitStarter', (data) => {
         // if (aseq.flow.loopcount > 0){
       //loop through the units and compare qnA subset match
      
-      console.log("continue with loop :" + aseq.flow.loopcount )
-      QAOverride(aseq.units[aseq.flow.execindex].postamble,aseq.flow.QnA);
-      QAOverride(aseq.units[aseq.flow.execindex].assert,aseq.units[aseq.flow.execindex].preamble)
-      
+      console.log(" seq loop count> 1 :" + aseq.flow.loopcount )
+      //push postamble to flow
+      console.log("pushed postamble after exec:" + JSON.stringify(aseq.units[aseq.flow.execindex].postamble.QnA) )
+      QO.QAOverride(aseq.units[aseq.flow.execindex].postamble.QnA,aseq.flow.QnA);
+      //push assert to preamble
+      QO.QAOverride(aseq.units[aseq.flow.execindex].assert,aseq.units[aseq.flow.execindex].preamble.QnA)
+      console.log("pushed assert:" + JSON.stringify(aseq.units[aseq.flow.execindex].assert) )
+     
       var cindex = -1;
        for (var unit of aseq.units)
        {
         cindex = cindex + 1; 
         eqar = {}
-        // if (unit.preamble)
+       
           {var eqar =unit.preamble.QnA};
-        console.log("flow qna:" + JSON.stringify(aseq.flow));
-        unit.preamble
-       if ( QATrigger(eqar,aseq.flow) === 1) {//
+        console.log("flow qna for:"+cindex + JSON.stringify(aseq.flow.QnA));
+        //unit.preamble match test
+       if ( QT.QATrigger(eqar,aseq.flow.QnA) === 1) {//
+        console.log("gate2 open:" + JSON.stringify(unit.preamble.QnA));
+      
         const process_sq ={};
         console.log("process index now:" + cindex);
         process_sq["user"] = aseq.user;
@@ -104,38 +112,29 @@ flowEmitter.on('SQ_UnitStarter', (data) => {
         process_sq["unitName"]=aseq.units[cindex].name;
         process_sq["unitIndex"]= cindex;
         process_sq["unitsh"]= unit.sh; 
-        aseq.flow["execindex"] = cindex;
-        if (aseq.units[cindex]["postamble"] == null) {aseq.flow["nextUnit"]= -1 } //safe
-        //process_sq["nextUnit"] = -1;
-       // process_sq["postamble"]=unit.postamble.QnA;
-       // process_sq["flow"] = data.flow;
-        //
-         console.log("New proc reg:" +JSON.stringify(process_sq));
-         //processSQ(process_sq);
+        //aseq.flow["execindex"] = cindex;
+        aseq.flow.execindex =cindex;
+        if (aseq.units[cindex]["postamble"].QnA == null) {aseq.flow["nextUnit"]= -1 } //safe
+       
+         console.log("about to sub:" +JSON.stringify(process_sq["unitName"]));
+       
   
   
-         updateLockedSequence(aseq);
-        //flowEmitter.emit("SQ_Process", process_sq);
-        // unit_trigger();
-      
-      subExec(process_sq)
+         uL.updateLockedUnit(aseq);
+     
+      sX.subExec(process_sq)
         
        break ;
        } 
-      console.log("increment:"+cindex);
+     // console.log("increment:"+cindex);
       
       }// for units
-      console.log("finished Execution");
+      console.log("finishing this loop:"+ aseq.flow.loopcount +":"+cindex);
+    
      }
 
       }
-
-
-
     }
-     
-    
     )
  
-  
     module.exports = { emit };

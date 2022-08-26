@@ -4,6 +4,7 @@ const fs = require('fs');
 const cf = require('./config.json');
 const locker = require(cf.sequencelocker);
 
+
 //const flowEmitter = require('./flowEmitter');
 const flowEmitter = require ('./process_flowEmitter.js')
    
@@ -28,7 +29,7 @@ function statusSequence(aproc) {
 
 
 
-function readLocker () { 
+function logSequence () { 
 
    var  st ={};
    st.user =locker.user
@@ -42,7 +43,7 @@ function readLocker () {
     }
   
   
- readLocker();
+ logSequence();
  console.log("e-SQ2: unit starter from:"+process.pid );
  flowEmitter.emit("SQ_UnitStarter", locker);
 

@@ -1,1 +1,0 @@
-console.log("The school vacation has started!");

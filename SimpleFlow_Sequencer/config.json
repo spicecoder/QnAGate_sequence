@@ -1,5 +1,6 @@
 {"process_dir":"process_units",
- "processlog" :"processstatusLog.json",
- "sequencelocker":"processUnitlocker.json",
+ "processlog" :"./processstatusLog.json",
+ "processregister":"processregister.json",
+ "sequencelocker":"./processunitlocker.json",
  "sequence" :"./docker_flower.json"
 } 

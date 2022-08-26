@@ -1,2 +1,2 @@
-echo "Starting unitrigger!";
-node e_unittrigger.js 
+echo "Starting unitrigger!"  
+node e_UnitEndTrigger.js > unitEndLog.txt 
