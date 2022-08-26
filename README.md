@@ -38,8 +38,26 @@ after doing npm install , run node e_unitStartTrigger.js ; this takes the flow f
 process_dir is the directory which is the sarting dir used in the flow definition docker_flower.json file used in the repo, which defines the units to be executed (as shell execfie as 
 independent process. 
 
+The sequence file defines the flow as below
+
+`
+ "name":"Docker_sequence",
+        "user": "u1",
+        "flow":{  "QnA":{},"looplimit":6
+        },
+        "units": [
+            {   "preamble" :{"QnA": { }},
+                "name": "unit_1",
+                "sh": "process_units/unit_1/buildu1.sh",
+                "assert":{"unit 1":"done"},
+               "postamble":{"QnA": {"u1 image built":"yes" } } 
+            } ,  etc 
+  `
+  The looplimit is important ,because the flow continues in a loop until the limit hit ,unless it has been stopped by QnA no open gate condition (yet to be implemented)
+
 Some To Do tasks :
-1. seperate the json files used during run time into seperate directory , provide seperate directory for log files ,
+0. intoduce the check for no open gate ; 
+1. seperate the json files used during run time into seperate directory , provide seperate directory for log files , generated sh file around each unit.
 2. Develop configurable user interaction in the preamble and postamble steps. [so in this casee the QATrigger and QAOverride logics can be driven by the UI 
 and user can drive the flow
 3. the module processflow_emitter uses even listener to react to startUnit and endUnit modules. This can be extended for cross machine communication through rest api or
