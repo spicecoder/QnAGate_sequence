@@ -65,6 +65,7 @@ pure messaging.
 4. A more generic computtaion model can be built using QnA facility to address some deep rooted software challenges, because QnA approach allows a system to grow
 dynamically absorbing domain experience and feed back. The notion that any computtaion has a preamble and a postamble built into it, encorages a computaion unit model
 that is inherently non tightly coupled to another unit,but  are easy to  configure to cooperate with other units through pure QnA, question and answers provided at time of execution.
+5. Introduce the semaphres to access the core json files between independent processes 
 
 ![image](https://user-images.githubusercontent.com/6982948/186930174-42b0a80b-28b2-43f7-934c-2e09b3805953.png)
 
