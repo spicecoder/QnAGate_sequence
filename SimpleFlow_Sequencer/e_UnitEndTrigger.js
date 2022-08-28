@@ -30,14 +30,15 @@ function statusSequence(aproc) {
 
 
 function logSequence () { 
-
+  console.log("for status to push:"+ JSON.stringify(locker.flow.execindex))
+   var windex = locker.flow.execindex.length -1 ;
    var  st ={};
    st.user =locker.user
    st.name =locker.name
-   st.unitName=locker.units[locker.flow.execindex].unitName
-   st.unitIndex=locker.flow.execindex
+   st.unitName=locker.units[windex].name
+   st.unitIndex=windex;
    st.loopcount=locker.flow.loopcount
-   //console.log("unit post status pushed:"+ JSON.stringify(st))
+
    
    statusSequence(st);
     }

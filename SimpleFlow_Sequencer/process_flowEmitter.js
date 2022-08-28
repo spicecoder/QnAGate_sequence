@@ -32,6 +32,12 @@ flowEmitter.on('SQ_UnitStarter', (data) => {
     return ;
   
    }
+   if (aseq.flow["nextUnit"] == -1) {
+    console.log("finishing ,next index -1");
+    exit(0);
+    return ;
+  
+   }
   if(data){
    
     if (aseq.flow.loopcount === 1){    //start of process
@@ -56,7 +62,8 @@ flowEmitter.on('SQ_UnitStarter', (data) => {
         process_sq["name"] = aseq.name;
         process_sq["unitName"]=aseq.units[cindex].name;
         process_sq["unitIndex"]= cindex;
-        aseq.flow.execindex =cindex;
+        aseq.flow.execindex =[]
+        aseq.flow.execindex.push(cindex);
         process_sq["unitsh"]= unit.sh; 
         //aseq.flow["execindex"] = cindex;
         if (aseq.units[cindex].postamble.QnA == "") {aseq.flow["nextUnit"]= -1 } //safe
@@ -74,7 +81,7 @@ flowEmitter.on('SQ_UnitStarter', (data) => {
       console.log("increment:"+cindex);
       
       }// for units
-      console.log("finishing this loop:"+ aseq.flow.loopcount +":"+aseq.flow.execindex);
+      console.log("finishing this loop:"+ aseq.flow.loopcount +":"+JSON.stringify(aseq.flow.execindex));
       //process.exit(0);
      }
 
@@ -87,11 +94,13 @@ flowEmitter.on('SQ_UnitStarter', (data) => {
      
       console.log(" seq loop count> 1 :" + aseq.flow.loopcount )
       //push postamble to flow
-      console.log("pushed postamble after exec:" + JSON.stringify(aseq.units[aseq.flow.execindex].postamble.QnA) )
-      QO.QAOverride(aseq.units[aseq.flow.execindex].postamble.QnA,aseq.flow.QnA);
+      //var windex = locker.flow.execindex.length -1 ;
+      var windex = aseq.flow.execindex[aseq.flow.execindex.length -1];
+      console.log("pushed postamble after exec:" + JSON.stringify(aseq.units[windex].postamble.QnA) )
+      QO.QAOverride(aseq.units[windex].postamble.QnA,aseq.flow.QnA);
       //push assert to preamble
-      QO.QAOverride(aseq.units[aseq.flow.execindex].assert,aseq.units[aseq.flow.execindex].preamble.QnA)
-      console.log("pushed assert:" + JSON.stringify(aseq.units[aseq.flow.execindex].assert) )
+      QO.QAOverride(aseq.units[windex].assert,aseq.units[windex].preamble.QnA)
+      console.log("pushed assert:" + JSON.stringify(aseq.units[windex].assert) )
      
       var cindex = -1;
        for (var unit of aseq.units)
@@ -113,8 +122,10 @@ flowEmitter.on('SQ_UnitStarter', (data) => {
         process_sq["unitIndex"]= cindex;
         process_sq["unitsh"]= unit.sh; 
         //aseq.flow["execindex"] = cindex;
-        aseq.flow.execindex =cindex;
-        if (aseq.units[cindex]["postamble"].QnA == null) {aseq.flow["nextUnit"]= -1 } //safe
+        //aseq.flow.execindex =cindex;
+        aseq.flow.execindex.push(cindex);
+        console.log("pushed index"+JSON.stringify(aseq.flow.excecindex) )
+        if (aseq.units[cindex]["postamble"].QnA == undefined) {aseq.flow["nextUnit"]= -1 } //safe
        
          console.log("about to sub:" +JSON.stringify(process_sq["unitName"]));
        
@@ -129,7 +140,7 @@ flowEmitter.on('SQ_UnitStarter', (data) => {
      // console.log("increment:"+cindex);
       
       }// for units
-      console.log("finishing this loop:"+ aseq.flow.loopcount +":"+cindex);
+      console.log("finishing this loop:"+ aseq.flow.loopcount +":with x index:"+cindex);
     
      }
 

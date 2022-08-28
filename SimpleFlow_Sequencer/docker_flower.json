@@ -33,7 +33,7 @@
         "name": "unit_5",
         "sh": "process_units/unit_5/runu2.sh",
         "assert":{"u2 image ran fine":"true"},
-       "postamble":{"QnA": {"u2 is ran":"yes" }} 
+       "postamble":{} 
     }
           
         ],
