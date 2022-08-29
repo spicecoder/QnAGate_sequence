@@ -26,7 +26,7 @@ after doing npm install , run node e_unitStartTrigger.js ; this takes the flow f
  "sequence" :"./docker_flower.json"
 } 
 `
-process_dir is the directory which is the sarting dir used in the flow definition docker_flower.json file used in the repo, which defines the units to be executed (as shell execfie as independent process. 
+process_dir is the directory which is the starting dir used in the flow definition docker_flower.json file used in the repo, which defines the units to be executed (as shell execfie as independent process. 
 
 The sequence file defines the flow as below
 
@@ -53,8 +53,7 @@ and user can drive the flow
 3. the module processflow_emitter uses event listener to react to startUnit and endUnit modules. This can be extended for cross machine communication through rest api or
 pure messaging. 
 4. A more generic computtaion model can be built using QnA facility to address some deep rooted software challenges, because QnA approach allows a system to grow
-dynamically absorbing domain experience and feed back. The notion that any computtaion has a preamble and a postamble built into it, encorages a computaion unit model
-that is inherently non tightly coupled to another unit,but  are easy to  configure to cooperate with other units through pure QnA, question and answers provided at time of execution.
+dynamically absorbing domain experience and feed back. The notion that any computaion has a preamble and a postamble built into it, encorages a computaion unit model that is inherently non tightly coupled to another unit, but are easy to  configure to cooperate with other units through pure QnA, question and answers provided at time of execution.
 5. Introduce the semaphres to access the core json files between independent processes 
 
 ![image](https://user-images.githubusercontent.com/6982948/186930174-42b0a80b-28b2-43f7-934c-2e09b3805953.png)
