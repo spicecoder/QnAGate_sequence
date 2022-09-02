@@ -17,7 +17,8 @@ Each unit has its own subEx function ,which submits a .sh file as an independent
 
 Through the QnA gate logic the repo allows some independent nodejs processes ,e.g docker containers to behave cooperatively by maintaining the desired sequence of execution while the QnA can also be exposed to user ,there by providing real time feed back from end user about the next task in the desired flow.
 The repo can be used as follows :
-after doing npm install , run node e_unitStartTrigger.js ; this takes the flow from the configuration defined in config.json , which has the following enties
+
+after doing npm install  from the subdir SIMPLEFLOW_SEQUENCE , run node e_unitStartTrigger.js ; this takes the flow from the configuration defined in config.json , which has the following enties
 `
 {"process_dir":"process_units",
  "processlog" :"./processstatusLog.json",
@@ -41,18 +42,16 @@ The sequence file defines the flow as below
                 "sh": "process_units/unit_1/buildu1.sh",
                 "assert":{"unit 1":"done"},
                "postamble":{"QnA": {"u1 image built":"yes" } } 
-<<<<<<< HEAD
+
             } ,  etc 
   `
+  
   The looplimit is important ,because the flow continues in a loop until the limit hit ,unless it has been stopped by QnA no open gate condition ;the convention adopted to address loop ending is if a unit has no postamble or if the QnA of the postamble is undefined , the next iteration of loop will exit because nextunit will be set to -1;
 
-            } ,  etc  `
-  
-  The looplimit is important ,because the flow continues in a loop until the limit hit ,unless it has been stopped by QnA no open gate condition (yet to be implemented)
 
 Some To Do tasks :
 1. intoduce the check for no open gate ; 
-2. seperate the json files used during run time into seperate directory , provide seperate directory for log files , generated sh file around each unit.
+2. seperate the json files used during run time into seperate directory , provide seperate directory for log files , generated sh file around each unit.- this is partially done - the dedicated directories are -> push_execs, unitEndLog ,userlog ; push_execs holds all generated exec files ,unitEndLog holds the sysout from each unit ,userlog is the directory that captures any excution output from users submitted programs inside a unit.   
 3. Develop configurable user interaction in the preamble and postamble steps. [so in this casee the QATrigger and QAOverride logics can be driven by the UI 
 and user can drive the flow
 3. the module processflow_emitter uses event listener to react to startUnit and endUnit modules. This can be extended for cross machine communication through rest api or
