@@ -1,0 +1,43 @@
+{
+    "Sequence": {
+        "name":"Greeter_sequence",
+        "user": "u1",
+        "flow":{  "QnA":{},"looplimit":6
+        },
+        "units": [
+            {   "preamble" :{"QnA": { }},
+                "name": "unit_1",
+                "sh": "process_units/unit_1/hellou1.sh",
+                "assert":{"unit 1":"done"},
+               "postamble":{"QnA": {"u1 said hello":"yes" } } 
+            } ,
+            {   "preamble" :{"QnA": {"u1 said hello":"yes" }},
+            "name": "unit_2",
+            "sh": "process_units/unit_2/hellou2.sh",
+            "assert":{"u1 image is good":"true"},
+            "postamble":{"QnA": {"u2 is ran":"yes" } } 
+        },
+        {   "preamble" :{"QnA": {"u2 is ran":"yes" }},
+            "name": "unit_3",
+            "assert":{"u1 run tested":"true"},
+            "sh": "process_units/unit_3/hellou3.sh",
+           "postamble":{"QnA": {"u2 said hello":"yes" }} 
+        },
+        {   "preamble" :{"QnA":{ "u2 said hello":"yes" }},
+        "name": "unit_4",
+        "sh": "process_units/unit_4/hellou4.sh",
+        "assert":{"u2 image is good":"true"},
+       "postamble":{"QnA": { "u5 is ready":"yes" }} 
+    },
+    {   "preamble" :{"QnA": {"u5 is ready":"yes" } },
+        "name": "unit_5",
+        "sh": "process_units/unit_5/hellou5.sh",
+        "assert":{"u5 image ran fine":"true"},
+       "postamble":{} 
+    }
+          
+        ]
+        
+    }
+
+}

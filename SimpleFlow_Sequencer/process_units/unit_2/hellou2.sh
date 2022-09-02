@@ -1,0 +1,1 @@
+node process_units/unit_2/hello.js u2 > userlog/u2.log

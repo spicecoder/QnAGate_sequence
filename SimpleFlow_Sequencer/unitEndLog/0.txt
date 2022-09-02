@@ -1,0 +1,17 @@
+for status to push:[0]
+e-SQ2: unit starter from:58841
+a start of loop event occurred!,loop count"Greeter_sequence"1 past indx:[0]
+ seq loop count> 1 :2
+pushed postamble after exec:{"u1 said hello":"yes"}
+pushed assert:{"unit 1":"done"}
+flow qna for:0{"u1 said hello":"yes"}
+flow qna for:1{"u1 said hello":"yes"}
+gate2 open:{"u1 said hello":"yes"}
+process index now:1
+pushed indexundefined
+about to sub:"unit_2"
+exec content:process_units/unit_2/hellou2.sh
+echo "Starting unitrigger!"; node e_UnitEndTrigger.js > unitEndLog/1.txt
+finishing this loop:2:with x index:1
+state after unit:Starting unitrigger!
+

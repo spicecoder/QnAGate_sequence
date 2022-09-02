@@ -4,7 +4,7 @@ function subExec(process_sq){{
     //we are going to make the pushunit.sh
     //and issue exec filer
     //extract index 
-  const filesh = "pushsh"+process_sq.name + process_sq.unitIndex + ".sh" ;
+  const filesh = "push_execs/pushsh"+process_sq.name + process_sq.unitIndex + ".sh" ;
   var shpath = path.join(__dirname, filesh);
   
    fs.exists(shpath, function(exists) {
@@ -18,7 +18,7 @@ function subExec(process_sq){{
   } }) 
   /*
 echo "Starting unitrigger!"  */
-var nstring = 'echo "Starting unitrigger!"; node e_UnitEndTrigger.js > ' + 'unitEndLog' +process_sq.unitIndex+ '.txt' 
+var nstring = 'echo "Starting unitrigger!"; node e_UnitEndTrigger.js > ' + 'unitEndLog/' +process_sq.unitIndex+ '.txt' 
   
   var content = process_sq.unitsh + "\n"  + nstring ;
   

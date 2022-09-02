@@ -2,5 +2,5 @@
  "processlog" :"./processstatusLog.json",
  "processregister":"processregister.json",
  "sequencelocker":"./processunitlocker.json",
- "sequence" :"./docker_flower.json"
+ "sequence" :"./greeter_flower.json"
 } 
