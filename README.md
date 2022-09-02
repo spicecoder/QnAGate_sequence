@@ -27,7 +27,7 @@ after doing npm install  from the subdir SIMPLEFLOW_SEQUENCE , run node e_unitSt
  "sequence" :"./docker_flower.json"
 } 
 `
-process_dir is the directory which is the starting dir used in the flow definition docker_flower.json file used in the repo, which defines the units to be executed (as shell execfie as independent process. 
+process_dir is the directory which is the starting dir used in the flow definition docker_flower.json file  or greeter_flower.json (no docker needed) file used in the repo, which defines the units to be executed (as shell execfie ,as independent process). 
 
 The sequence file defines the flow as below
 
