@@ -41,9 +41,7 @@ The sequence file defines the flow as below
                 "name": "unit_1",
                 "sh": "process_units/unit_1/buildu1.sh",
                 "assert":{"unit 1":"done"},
-               "postamble":{"QnA": {"u1 image built":"yes" } } 
-
-            } ,  etc 
+               "postamble":{"QnA": {"u1 image built":"yes" } }} ,  etc 
   `
   
   The looplimit is important ,because the flow continues in a loop until the limit hit ,unless it has been stopped by QnA no open gate condition ;the convention adopted to address loop ending is if a unit has no postamble or if the QnA of the postamble is undefined , the next iteration of loop will exit because nextunit will be set to -1;
