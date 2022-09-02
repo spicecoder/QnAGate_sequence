@@ -53,7 +53,7 @@ The sequence file defines the flow as below
                "postamble":{"QnA": {"u1 image built":"yes" } } 
             } ,  etc 
   `
-  The looplimit is important ,because the flow continues in a loop until the limit hit ,unless it has been stopped by QnA no open gate condition (yet to be implemented)
+  The looplimit is important ,because the flow continues in a loop until the limit hit ,unless it has been stopped by QnA no open gate condition ;the convention adopted to address loop ending is if a unit has no postamble or if the QnA of the postamble is undefined , the next iteration of loop will exit because nextunit will be set to -1;
 
 Some To Do tasks :
 0. intoduce the check for no open gate ; 
