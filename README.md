@@ -28,7 +28,7 @@ after doing npm install  from the subdir SIMPLEFLOW_SEQUENCE , run node e_unitSt
 } 
 `
 process_dir is the directory which is the starting dir used in the flow definition docker_flower.json file  or greeter_flower.json (no docker needed) file used in the repo, which defines the units to be executed (as shell execfie ,as independent process). 
-
+You can refer to the png in that directory for a synopsis of the logic driving QnA Gate : [synopsis](https://github.com/spicecoder/QnAGate_sequence/blob/main/SimpleFlow_Sequencer/7Functions-QNA.png)
 The sequence file defines the flow as below
 
 `
