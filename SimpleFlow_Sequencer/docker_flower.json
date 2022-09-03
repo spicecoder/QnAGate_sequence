@@ -2,7 +2,7 @@
     "Sequence": {
         "name":"Docker_sequence",
         "user": "u1",
-        "flow":{  "QnA":{},"looplimit":6
+        "flow":{  "QnA":{},"looplimit":5
         },
         "units": [
             {   "preamble" :{"QnA": { }},

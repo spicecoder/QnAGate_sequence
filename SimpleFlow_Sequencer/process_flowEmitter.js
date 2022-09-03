@@ -27,7 +27,7 @@ flowEmitter.on('SQ_UnitStarter', (data) => {
   var aseq = data; 
   aseq.flow.loopcount = parseInt(data.flow.loopcount ) + 1 ;
   if (aseq.flow.loopcount > parseInt(aseq.flow.looplimit)) {
-    console.log("finishing ,loop limit reached");
+    console.log("finishing -exiting ,loop limit reached");
     exit(0);
     return ;
   

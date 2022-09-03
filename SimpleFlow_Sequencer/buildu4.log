@@ -1,0 +1,49 @@
+#1 [internal] load build definition from Dockerfile
+#1 sha256:97b05952779f8a764faeb1cd37fd940a27c8921eaa9c0e10d7a80083887b300d
+#1 transferring dockerfile: 44B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 sha256:2a795311555d259ac3f6e2d9bdb1216c15d503d8eae930fdc73208fe79cb3ca3
+#2 transferring context: 2B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:10
+#3 sha256:3af94700eddd7306f022f111ebaedfb2b528a274c7884467f1290423681c9a11
+#3 DONE 0.4s
+
+#4 [1/6] FROM docker.io/library/node:10@sha256:59531d2835edd5161c8f9512f9e095b1836f7a1fcb0ab73e005ec46047384911
+#4 sha256:1433f49f388d7d7590590cd7318f6f3daca57a070fba12d25c237c8ab4a0ff6b
+#4 DONE 0.0s
+
+#6 [internal] load build context
+#6 sha256:9c460a21ba2b1c76d3441dc56581c229a3be80bb286892b1d07be26e0cd77bf7
+#6 transferring context: 13.13kB done
+#6 DONE 0.0s
+
+#9 [5/6] RUN npm install
+#9 sha256:7ef1671f9e880c10b7a589d1342883faab3a0d5f7f3f37457c7f98a36d456289
+#9 CACHED
+
+#8 [4/6] COPY package-lock.json ./
+#8 sha256:744ee37676ec7cd38d5b4a6ef999d997761d8834530a63c09f38ffdae7cea609
+#8 CACHED
+
+#5 [2/6] WORKDIR /app
+#5 sha256:946c283cb1ec73a9125c516a8bddf4745ec5e92241f7876bcd6b7416eec2e87c
+#5 CACHED
+
+#7 [3/6] COPY package.json ./
+#7 sha256:096f765f9195839e6568823124d31bf4bb0ca4dfb90708f53f3bfc9673e57567
+#7 CACHED
+
+#10 [6/6] COPY . ./
+#10 sha256:0e43426e02d92843b473e3d29e8298b8c922c6bfeeb34be796696d880d65dbdd
+#10 CACHED
+
+#11 exporting to image
+#11 sha256:e8c613e07b0b7ff33893b694f7759a10d42e180f2b4dc349fb57dc6b71dcab00
+#11 exporting layers done
+#11 writing image sha256:8da6209dde113865a6e40f5bc9aa631c4dec31d82365f4b3ed9746af5e08bdcc done
+#11 naming to docker.io/library/u2img done
+#11 DONE 0.0s
