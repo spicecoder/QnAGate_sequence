@@ -1,4 +1,6 @@
-function updateLockedUnit(jlocker){var storeinfopath = path.join(__dirname, "/processunitlocker.json");
+//sequencelocker
+const cf = require('./config.json');
+function updateLockedUnit(jlocker){var storeinfopath = path.join(__dirname, cf.sequencelocker);
 //console.log("read:" +fs.readFileSync(storeinfopath));
 //var locker = fs.readFileSync(storeinfopath)
 //var jlocker =JSON.parse(locker);
