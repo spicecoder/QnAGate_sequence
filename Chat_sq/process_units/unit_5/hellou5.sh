@@ -1,0 +1,1 @@
+node process_units/unit_5/hello.js u5 > userlog/u5.log

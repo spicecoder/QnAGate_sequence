@@ -1,0 +1,4 @@
+for status to push:[0,1,2,3,4]
+e-SQ2: unit starter from:99478
+a start of loop event occurred!,loop count"Greeter_sequence"5 past indx:[0,1,2,3,4]
+finishing ,next index -1

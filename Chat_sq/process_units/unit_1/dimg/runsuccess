@@ -1,0 +1,33 @@
+Platform_docker % docker run --name runvolmap -v $(pwd)/images:/input/:rw  -v $(pwd)/processed_images:/output/:rw  rotateio
+
+//so the question now is how to pass prameters ,how to pass env vars
+//can we support positional parameters?
+rule 1. parameter name=value 
+rule 2. env - e ?
+node p_rotate.js angle=150.00 --env libv="sharp"
+
+JS
+
+const args = require('minimist')(process.argv.slice(2))
+args['name'] //joe
+
+Install the required minimist package using npm (lesson about the package manager comes later on).
+
+BASH
+
+npm install minimist
+
+docker run ... --env libv="sharp"
+process.env.libv => p_rotate
+const rotateImage = () => {
+  sharp('/input/abs1.jpg')
+  .rotate(parseInt(angle))
+  .toFile( '/ouput/protate_abs1.jpg')  --> absolute path inside
+
+  with env ,params ,io :
+   docker run --env libv="sharp"  --name prunvolmape  -v $(pwd)/images:/input/:rw  -v $(pwd)/processed_images:/output/:rw  protateio angle=300
+pronabp@7020L-154996-M Platform_docker % 
+
+node download_file.js images_container abs1.jpg
+--pronabp@7020L-154996-M Platform_docker % node download_dfile.js images_container  downimages/  dg1.jpg
+pronabp@7020L-154996-M Platform_docker % node upload_file.js images_container uploaddogs/ images/ dg1.jpg

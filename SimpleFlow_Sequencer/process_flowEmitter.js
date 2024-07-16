@@ -74,7 +74,12 @@ flowEmitter.on('SQ_UnitStarter', (data) => {
   
          uL.updateLockedUnit(aseq);
         
-      sX.subExec(process_sq)
+   const SequenceController = require('./SequenceController');
+const controller = new SequenceController('./config.json');
+
+controller.init();
+controller.startSequence();
+
         
        break ;
        } 

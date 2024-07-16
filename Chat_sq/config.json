@@ -1,0 +1,6 @@
+{"process_dir":"process_units",
+ "processlog" :"./processstatusLog.json",
+ "processregister":"processregister.json",
+ "sequencelocker":"./processunitlocker.json",
+ "sequence" :"./greeter_flower.json"
+} 

@@ -1,0 +1,22 @@
+{
+    "designChunks": [
+      { "id": "dc1", "name": "User Authentication" },
+      { "id": "dc2", "name": "Data Processing" },
+      { "id": "dc3", "name": "Reporting" }
+    ],
+    "intentions": [
+      { "id": "i1", "description": "Validate User", "emitter_id": "dc1", "receiver_id": "dc2" },
+      { "id": "i2", "description": "Process Data", "emitter_id": "dc2", "receiver_id": "dc3" },
+      { "id": "i3", "description": "Generate Report", "emitter_id": "dc3", "receiver_id": null }
+    ],
+    "objects": [
+      { "id": "o1", "name": "User Credentials" },
+      { "id": "o2", "name": "Raw Data" },
+      { "id": "o3", "name": "Processed Data" }
+    ],
+    "intentionObjectMappings": [
+      { "intention_id": "i1", "object_id": "o1", "reflected_intention_id": "i2" },
+      { "intention_id": "i2", "object_id": "o2", "reflected_intention_id": "i3" },
+      { "intention_id": "i3", "object_id": "o3", "reflected_intention_id": null }
+    ]
+  }
